@@ -65,6 +65,24 @@ const Formulario = () => {
             type="date"
           />
         </div>
+        <div className="mb-3">
+          <label
+            htmlFor="sintomas"
+            className=" block text-gray-700 uppercase font-bold"
+          >
+            Sintomas
+          </label>
+          <textarea
+            id="sintomas"
+            className="border-2 w-full mt-2 p-2 rounded-md placeholder-gray-400"
+            placeholder="Describe los síntomas"
+          />
+        </div>
+        <input
+        type="submit"
+        className="bg-indigo-600 w-full p-3 text-white uppercase font-bold"
+        value="agregar pacientes"
+        />
       </form>
     </div>
   );
