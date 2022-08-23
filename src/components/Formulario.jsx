@@ -1,7 +1,7 @@
 const Formulario = () => {
   return (
     <div className="md:w-1/2 lg:w-2/5 ">
-      <h2 className="font-black text-3xl text-center ">
+      <h2 className="font-black text-2xl text-center ">
         Seguimiento Pacientos
       </h2>
       <p className="text-lg text-center mt-3 mb-3">
@@ -9,7 +9,7 @@ const Formulario = () => {
         <span className=" font-bold text-indigo-600 ">Administralos</span>
       </p>
 
-      <form className=" bg-white rounded-lg shadow-md py-10 px-5">
+      <form className=" bg-white rounded-lg shadow-xl py-10 px-5 mb-10">
         <div className="mb-3">
           <label
             htmlFor="mascota"
@@ -79,9 +79,9 @@ const Formulario = () => {
           />
         </div>
         <input
-        type="submit"
-        className="bg-indigo-600 w-full p-3 text-white uppercase font-bold"
-        value="agregar pacientes"
+          type="submit"
+          className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer"
+          value="agregar pacientes"
         />
       </form>
     </div>
