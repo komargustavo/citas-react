@@ -1,4 +1,4 @@
-import Paciente from "../Paciente";
+import Paciente from "./Paciente";
 
 const ListadoPacientes = () => {
   return (
@@ -8,7 +8,7 @@ const ListadoPacientes = () => {
         Administra tus {""}
         <span className="font-bold text-indigo-600">pacientes y citas</span>
       </p>
-      <Paciente />
+      <Paciente/>
     </div>
   );
 };
