@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Formulario = () => {
+const Formulario = ({ pacientes, setPacientes }) => {
   const [nombre, setNombre] = useState("");
   const [propietario, setPropietario] = useState("");
   const [email, setEmail] = useState("");
@@ -14,9 +14,25 @@ const Formulario = () => {
     //Validar Formulario
     if ([nombre, propietario, email, fecha, sintomas].includes("")) {
       setError(true);
-    } else {
-      setError(false);
+      return;
     }
+    setError(false);
+    // Objeto Paciente
+    const objetoPaciente = {
+      nombre: nombre,
+      propietario: propietario,
+      email: email,
+      fecha: fecha,
+      sintomas: sintomas,
+    };
+    // Uso el Spread Operator para agregar al arreglo de pacientes un paciente nuevo
+    setPacientes([...pacientes, objetoPaciente]);
+    //Reiniciar Formulario
+    setNombre = ("");
+    setPropietario = ("");
+    setEmail = ("");
+    setFecha = ("");
+    setSintomas = ("");
   };
 
   return (
