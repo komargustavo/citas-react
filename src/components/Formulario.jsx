@@ -1,4 +1,6 @@
+import NoWorkResult from "postcss/lib/no-work-result";
 import { useState } from "react";
+import Error from "./Error";
 
 const Formulario = ({ pacientes, setPacientes }) => {
   const [nombre, setNombre] = useState("");
@@ -7,6 +9,12 @@ const Formulario = ({ pacientes, setPacientes }) => {
   const [fecha, setFecha] = useState("");
   const [sintomas, setSintomas] = useState("");
   const [error, setError] = useState(false);
+
+  const generarId = () => {
+    const random = Math.random().toString(36).substr(2);
+    const fecha = Date.now().toString(36);
+    return random + fecha;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,15 +32,16 @@ const Formulario = ({ pacientes, setPacientes }) => {
       email: email,
       fecha: fecha,
       sintomas: sintomas,
+      id: generarId(),
     };
     // Uso el Spread Operator para agregar al arreglo de pacientes un paciente nuevo
     setPacientes([...pacientes, objetoPaciente]);
     //Reiniciar Formulario
-    setNombre = ("");
-    setPropietario = ("");
-    setEmail = ("");
-    setFecha = ("");
-    setSintomas = ("");
+    setNombre("");
+    setPropietario("");
+    setEmail("");
+    setFecha("");
+    setSintomas("");
   };
 
   return (
@@ -49,11 +58,7 @@ const Formulario = ({ pacientes, setPacientes }) => {
         className=" bg-white rounded-lg shadow-xl py-10 px-5 mb-10"
         onSubmit={handleSubmit}
       >
-        {error && (
-          <div className=" block rounded-xl bg-red-700 font-bold uppercase text-white text-center p-3 mb-2">
-            <p>Todos los campos son obligatorios</p>
-          </div>
-        )}
+        {error && <Error mensaje="Todos los campos son obligatorios" />}
         <div className="mb-3">
           <label
             htmlFor="mascota"
