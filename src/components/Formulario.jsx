@@ -1,8 +1,8 @@
-import NoWorkResult from "postcss/lib/no-work-result";
+//import NoWorkResult from "postcss/lib/no-work-result";
 import { useState } from "react";
 import Error from "./Error";
 
-const Formulario = ({ pacientes, setPacientes }) => {
+const Formulario = ({ pacientes, setPacientes, paciente }) => {
   const [nombre, setNombre] = useState("");
   const [propietario, setPropietario] = useState("");
   const [email, setEmail] = useState("");
@@ -11,6 +11,7 @@ const Formulario = ({ pacientes, setPacientes }) => {
   const [error, setError] = useState(false);
 
   const generarId = () => {
+    //genera el KeyId (Id) del objetoPaciente en forma aleatoria
     const random = Math.random().toString(36).substr(2);
     const fecha = Date.now().toString(36);
     return random + fecha;
@@ -46,6 +47,8 @@ const Formulario = ({ pacientes, setPacientes }) => {
 
   return (
     <div className="md:w-1/2 lg:w-2/5 m-3">
+
+
       <h2 className="font-black text-2xl text-center ">
         Seguimiento Pacientos
       </h2>
