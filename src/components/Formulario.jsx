@@ -1,5 +1,4 @@
-//import NoWorkResult from "postcss/lib/no-work-result";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Error from "./Error";
 
 const Formulario = ({ pacientes, setPacientes, paciente }) => {
