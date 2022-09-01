@@ -9,6 +9,17 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
   const [sintomas, setSintomas] = useState("");
   const [error, setError] = useState(false);
 
+  useEffect(() => {
+    //Con "Object.keys(paciente)" compruebo si el objeto "paciente" esta vacio o no
+    if (Object.keys(paciente).length > 0) {
+      setNombre(paciente.nombre);
+      setPropietario(paciente.propietario);
+      setEmail(paciente.email);
+      setFecha(paciente.fecha);
+      setSintomas(paciente.sintomas);
+    }
+  }, [paciente]);
+
   const generarId = () => {
     //genera el KeyId (Id) del objetoPaciente en forma aleatoria
     const random = Math.random().toString(36).substr(2);
@@ -24,6 +35,7 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
       setError(true);
       return;
     }
+
     setError(false);
     // Objeto Paciente
     const objetoPaciente = {
@@ -32,10 +44,18 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
       email: email,
       fecha: fecha,
       sintomas: sintomas,
-      id: generarId(),
     };
-    // Uso el Spread Operator para agregar al arreglo de pacientes un paciente nuevo
-    setPacientes([...pacientes, objetoPaciente]);
+
+    if (paciente.id) {
+      //Editando reistro paciente
+      objetoPaciente.id = paciente.id;
+    } else {
+      //Nuevo registro
+      objetoPaciente.id = generarId();
+      // Uso el Spread Operator para agregar al arreglo de pacientes un paciente nuevo
+      setPacientes([...pacientes, objetoPaciente]);
+    }
+
     //Reiniciar Formulario
     setNombre("");
     setPropietario("");
@@ -46,8 +66,6 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
 
   return (
     <div className="md:w-1/2 lg:w-2/5 m-3">
-
-
       <h2 className="font-black text-2xl text-center ">
         Seguimiento Pacientos
       </h2>
@@ -152,7 +170,7 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
         <input
           type="submit"
           className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer"
-          value="agregar pacientes"
+          value={paciente.id ? "editar paciente" : "agregar pacientes"}
         />
       </form>
     </div>
