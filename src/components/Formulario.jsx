@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Error from "./Error";
 
-const Formulario = ({ pacientes, setPacientes, paciente }) => {
+const Formulario = ({ pacientes, setPacientes, paciente, setPaciente }) => {
   const [nombre, setNombre] = useState("");
   const [propietario, setPropietario] = useState("");
   const [email, setEmail] = useState("");
@@ -37,7 +37,7 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
     }
 
     setError(false);
-    // Objeto Paciente
+    // Creo el objetoPaciente con los datos que entran en el formulario
     const objetoPaciente = {
       nombre: nombre,
       propietario: propietario,
@@ -49,10 +49,13 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
     if (paciente.id) {
       //Editando reistro paciente
       objetoPaciente.id = paciente.id;
+      const pacientesActualizados = pacientes.map(pacienteState => pacienteState.id === paciente.id ? objetoPaciente : pacienteState)
+      setPacientes(pacientesActualizados)
+      setPaciente({})
     } else {
       //Nuevo registro
       objetoPaciente.id = generarId();
-      // Uso el Spread Operator para agregar al arreglo de pacientes un paciente nuevo
+      // Uso el Spread Operator para agregar al arreglo de pacientes un paciente nuevo desde objetoPaciente
       setPacientes([...pacientes, objetoPaciente]);
     }
 

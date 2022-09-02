@@ -1,6 +1,6 @@
 import Paciente from "./Paciente";
 
-const ListadoPacientes = ({ pacientes, setPaciente }) => {
+const ListadoPacientes = ({ pacientes, setPaciente,eliminarPaciente }) => {
 
 
   return (
@@ -19,10 +19,11 @@ const ListadoPacientes = ({ pacientes, setPaciente }) => {
               key={paciente.id}
               paciente={paciente}
               setPaciente={setPaciente}
+              eliminarPaciente={eliminarPaciente}
             />
           ))}
-        </>
-      ) : (
+          </>
+      ):(
         <>
           <h2 className="text-center font-black text-2xl">No hay Pacientes</h2>
           <p className="text-lg text-center mt-3 mb-3">
