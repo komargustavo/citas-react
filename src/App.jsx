@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Formulario from "./components/Formulario";
 import Header from "./components/Header";
 import ListadoPacientes from "./components/ListadoPacientes";
@@ -7,10 +7,26 @@ function App() {
   const [pacientes, setPacientes] = useState([]);
   const [paciente, setPaciente] = useState({});
 
+  useEffect(() => {
+    //Convierto el strig que hay en localStorage en arreglo con 'parse'
+    const obtenerLS = () => {
+      const pacientesLS = JSON.parse(localStorage.getItem('pacientes')) ?? [];
+      setPacientes(pacientesLS);
+    };
+    obtenerLS();
+  },[]);
+
+  useEffect(() => {
+    //se convierte el arreglo pacietnes a strig porque el localstorage no acepta arreglos
+    localStorage.setItem("pacientes", JSON.stringify(pacientes));
+  }, [pacientes]);
+
   const eliminarPaciente = (id) => {
-    const pacientesActualizados = pacientes.filter((paciente) =>  paciente.id !== id )
-    setPacientes(pacientesActualizados)
-  }
+    const pacientesActualizados = pacientes.filter(
+      (paciente) => paciente.id !== id
+    );
+    setPacientes(pacientesActualizados);
+  };
 
   return (
     <div className=" container mx-auto mt-10">
